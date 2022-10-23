@@ -8,6 +8,11 @@ def index(request):
     return render(request, template)
 
 
+def group_list(request):
+    template = 'posts/group_list.html'
+    return render(request, template)
+
+
 # Страница со списком постов
 def posts_list(request):
     return HttpResponse('Список постов')
