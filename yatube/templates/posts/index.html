@@ -10,12 +10,19 @@
     {% include 'includes/header.html' %}
     <main> 
       {% block content %}
-      <!-- класс py-5 создает отступы сверху и снизу блока -->
-      <div class="container py-5">     
-        <h1>{{ text }}</h1>
-        <a href="group_list/"> ссыль </a>
-        <!-- под последним постом нет линии -->
-      </div> 
+      {% for post in posts %}
+        <ul>
+          <li>
+            Автор: {{ post.author.get_full_name }}
+          </li>
+          <li>
+            Дата публикации: {{ post.pub_date|date:"d E Y" }}
+          </li>
+        </ul>
+      <p>{{ post.text }}</p>    
+    <a href="">все записи группы</a>
+  {% if not forloop.last %}<hr>{% endif %}
+{% endfor %} 
       {% endblock %} 
     </main>
     <!-- Использованы классы бустрапа: -->
