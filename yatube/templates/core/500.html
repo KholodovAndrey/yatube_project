@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Custom 500{% endblock %}
+
+{% block content %}
+  <h1>500</h1>
+  <h2>У фиксиков перерыв, но мы их уже вызвали.</h2>
+  <h2>Скоро все заведется.</h2>
+  <a href="{% url 'posts:index' %}">На главную</a>
+{% endblock %}

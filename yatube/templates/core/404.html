@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Custom 404{% endblock %}
+
+{% block content %}
+  <h1>404</h1>
+  <h2>{{ path }} - Прекрасная страница, каких больше не делают</h2>
+  <h2>Попробуйте начать всё с начала и поищите что-нибудь другое</h2>
+  <a href="{% url 'posts:index' %}">На главную</a>
+{% endblock %}

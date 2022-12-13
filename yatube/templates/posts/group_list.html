@@ -1,32 +1,12 @@
-<!DOCTYPE html> <!-- Используется html 5 версии -->
-<html lang="ru"> <!-- Язык сайта - русский -->
 {% extends 'base.html' %}
-  <head>    
-    {% include 'includes/head.html' %}
-  </head>
-  <body>
-    {% include 'includes/header.html' %}
-    <main>
-      {% block content %}
-      <h1>{{ group }}</h1>
-      {% for post in posts %}
-          <arrticle>
-            <ul>
-              <li>
-                Автор: {{ post.author.get_full_name }}
-              </li>
-              <li>
-                Дата публикации: {{ post.pub_date|date:"d E Y" }}
-              </li>
-            </ul>
-          <p>{{ post.text }}</p>    
-          {% if post.group %}   
-          {% endif %} 
-          {% if not forloop.last %}<hr>{% endif %}
-          </article>
-        {% endfor %}       
-      {% endblock %}  
-    </main>
-    {% include 'includes/footer.html' %} 
-  </body>
-</html>
+{% block title %} 
+  Записи группы {{ group.title }}
+{% endblock %} 
+{% block content %}
+  <h1>{{ group.title }}</h1>
+  <p>{{ group.description }}</p>
+  {% for post in page_obj %}
+    {% include 'posts/includes/article.html' with show_author_link=True %}
+  {% endfor %}
+  <center>{% include 'posts/includes/paginator.html' %}      
+{% endblock %}

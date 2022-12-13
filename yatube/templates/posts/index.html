@@ -1,29 +1,16 @@
-<!DOCTYPE html> <!-- Используется html 5 версии -->
-<html lang="ru"> <!-- Язык сайта - русский -->
 {% extends 'base.html' %}
-  <head>   
-    {% include 'includes/head.html' %}
-    <title>Последние обновления на сайте</title>
-  </head>
-  <body>
-    {% include 'includes/header.html' %}
-      <main> 
-        {% block content %}
-          {% for post in posts %}
-            <arrticle>
-              <ul>
-                <li>Автор: {{ post.author.get_full_name }}</li>
-                <li>Дата публикации: {{ post.pub_date|date:"d E Y" }}</li>
-              </ul>
-              <p>{{ post.text }}</p>    
-              {% if post.group %}   
-                <a href="{% url 'posts:group_list' post.group.slug %}">все записи группы {{ post.group }}</a>
-              {% endif %} 
-              {% if not forloop.last %}<hr>{% endif %}
-            </article>
-          {% endfor %}       
-        {% endblock content %} 
-      </main>      
-    {% include 'includes/footer.html' %} 
-  </body>
-</html>
+{% block title %}
+  Главная страница
+{% endblock %} 
+{% block content %}
+  {% include 'posts/includes/switcher.html' with index=True %}
+  <h1>Последние обновления на сайте</h1>
+  {% for post in page_obj %}
+  {% include 'posts/includes/article.html' with show_author_link=True %} 
+  {% endfor %}
+  <p>
+    <hr>
+    {% include 'posts/includes/paginator.html' %}
+  </p>  
+{% endblock %}
+ 
